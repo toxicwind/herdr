@@ -13,7 +13,7 @@
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI } from "tau";
 import {
   fuzzyFilter,
   type AutocompleteItem,

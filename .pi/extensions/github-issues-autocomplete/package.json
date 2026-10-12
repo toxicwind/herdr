@@ -14,7 +14,7 @@
     ]
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "latest",
+    "tau": "latest",
     "@earendil-works/pi-tui": "latest",
     "@types/node": "latest",
     "typescript": "latest"
