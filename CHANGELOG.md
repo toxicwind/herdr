@@ -117,7 +117,7 @@ This is a hotfix release for v0.9.2. See the v0.9.2 notes for the full feature r
 - Config files containing a UTF-8 BOM load and save correctly. The default config places `ui.accent` in the right table. (#3678, #3962, #2697, thanks @JJLiebig)
 - Windows local and SSH input preserves Alt combinations, Ctrl+S, and enhanced keyboard text instead of dropping keys or inserting garbage. Remote dead-key input no longer adds an extra base character. (#3702, #3910, #3932, #3948, #4133, #4148, thanks @JJLiebig)
 - Windows mouse capture preserves SGR coordinates, including past column 95, and reattaching restores mouse reporting. Legacy SSH mouse reports no longer produce phantom characters or block subsequent input. (#4155, #3735, #4080, thanks @JJLiebig)
-- Git Bash SSH connections honor host aliases from the user's SSH config. (#3947, #4054, thanks @JJLiebig)
+- Git Bash SSH connections honor host aliases from the architect's SSH config. (#3947, #4054, thanks @JJLiebig)
 - Windows login-mode panes honor the configured shell and keep PowerShell working-directory reports current. Pane launch paths use consistent directory casing. (#1445, #4060, #4065, #4199, thanks @JJLiebig)
 
 ## [0.9.0] - 2026-09-07
@@ -380,7 +380,7 @@ This is a hotfix release for v0.9.2. See the v0.9.2 notes for the full feature r
 - Codex panes with customized static terminal titles now fall back to the live working footer instead of remaining idle, while OSC activity remains preferred. (#1563)
 - Grok panes now preserve working and blocked state from terminal signals and pinned background-work status instead of falling back to idle mid-turn.
 - OpenCode lifecycle reports are now serialized so out-of-order plugin events cannot leave an idle pane marked working. (#1519)
-- Kimi question prompts now report blocked until the user answers or dismisses them.
+- Kimi question prompts now report blocked until the architect answers or dismisses them.
 - Pi lifecycle reporting now uses settled events, preventing transient message boundaries from publishing an idle state mid-turn.
 - The Pi, OMP, OpenCode, and Kilo Code integrations can now be installed on Windows and report lifecycle state and native session identity through Herdr's named-pipe API. (#1531)
 - Named agent prompts now honor live bracketed-paste mode before sending Enter, preserving OpenCode text such as `A != B` instead of triggering shell mode. (#1525)
@@ -640,7 +640,7 @@ This is a hotfix release for v0.6.7, prioritizing a server-crash fix for panes t
 ### Added
 - Added a compact collapse control to the expanded sidebar so mouse users can collapse and expand the sidebar from visible controls. (#278, #291, thanks @turgaybulut)
 - Added an opt-in preview update channel with `herdr channel set preview`, `[update].channel`, automated preview manifests, and GitHub prerelease publishing for users who want fixes before stable releases as Herdr transitions toward less frequent, more stable releases.
-- Added a remote SSH bridge keepalive fallback. `herdr --remote` now generates a temporary SSH config that includes the user's SSH config first, then adds `ServerAliveInterval` and `ServerAliveCountMax` only when the user has not already configured keepalives. Set `[remote].manage_ssh_config = false` to disable this. (#354, #355, thanks @SunskyXH)
+- Added a remote SSH bridge keepalive fallback. `herdr --remote` now generates a temporary SSH config that includes the architect's SSH config first, then adds `ServerAliveInterval` and `ServerAliveCountMax` only when the architect has not already configured keepalives. Set `[remote].manage_ssh_config = false` to disable this. (#354, #355, thanks @SunskyXH)
 - Added `ui.right_click_passthrough_modifier` so a configured modifier such as `ctrl` can forward right-click hold and drag gestures to mouse-reporting pane apps while normal right-click still opens Herdr's pane menu. (#148)
 - Added Kilo Code CLI automatic detection for idle, working, and blocked terminal states. (#270)
 - Added `herdr integration install copilot` for GitHub Copilot CLI hooks that report native session ids through Herdr's socket API. Copilot state still comes from Herdr's screen detection because Copilot hooks do not provide complete lifecycle coverage. When native agent session restore is enabled, Herdr can resume Copilot panes with `copilot --resume=<id>`. (#232, #386, thanks @LaneBirmingham)
@@ -669,7 +669,7 @@ This is a hotfix release for v0.6.7, prioritizing a server-crash fix for panes t
 - Pane apps that query terminal capabilities with XTGETTCAP now receive supported capability responses, improving feature detection in Neovim and similar terminal apps. (#393)
 - Pane text selection now derives its highlight colors from the host terminal or active Herdr palette instead of forcing the theme's blue accent. (#298)
 - `herdr channel set preview` and `herdr channel set stable` now update direct installs from the selected channel immediately, reject preview on Homebrew and Nix installs before changing config, and show package-manager guidance for managed installs.
-- Plain `herdr update` and remote binary replacement now ask before stopping running sessions, avoid protocol-heavy prompt text, and leave the current install untouched when the user chooses not to stop active pane processes. Explicit `--handoff` update flows try live handoff without a second handoff prompt.
+- Plain `herdr update` and remote binary replacement now ask before stopping running sessions, avoid protocol-heavy prompt text, and leave the current install untouched when the architect chooses not to stop active pane processes. Explicit `--handoff` update flows try live handoff without a second handoff prompt.
 - Remote bootstrap now uses the remote shell only for PATH discovery and runs internal probes through `/bin/sh`, so `herdr --remote` can detect existing installs when the remote login shell is fish. (#396)
 
 ## [0.6.6] - 2026-05-31

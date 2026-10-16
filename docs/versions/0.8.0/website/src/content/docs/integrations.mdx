@@ -73,7 +73,7 @@ An agent running in a Herdr pane inherits `HERDR_ENV`, `HERDR_PANE_ID`, `HERDR_B
   --state working
 ```
 
-Report `idle` when the agent is ready for input and `blocked` when it needs a user decision. Use `--message` to describe a block. When the agent exits, release the same source's lifecycle authority:
+Report `idle` when the agent is ready for input and `blocked` when it needs an architect decision. Use `--message` to describe a block. When the agent exits, release the same source's lifecycle authority:
 
 ```bash
 "$HERDR_BIN_PATH" pane release-agent "$HERDR_PANE_ID" \

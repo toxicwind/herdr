@@ -43,7 +43,7 @@ Only report when `HERDR_ENV=1` and the other variables are set. Outside Herdr, y
   --seq 1
 ```
 
-- Report `working` when a turn starts, `idle` when your agent is ready for input, and `blocked` when it needs the user to decide something. Add `--message` to explain a block.
+- Report `working` when a turn starts, `idle` when your agent is ready for input, and `blocked` when it needs the architect to decide something. Add `--message` to explain a block.
 - `--agent` is the name users see. Use your own agent's name, not the name of an agent Herdr already supports.
 - `--source` identifies your integration. Keep it stable and unique. Don't start it with `herdr:`, because Herdr's own integrations use that prefix.
 - `--seq` is optional but recommended. It must increase with every report from your source, including across sessions and restarts of your agent. A timestamp works well. Herdr ignores reports whose number is not higher than the last one it accepted, so late or out-of-order reports can't overwrite newer state.
@@ -66,7 +66,7 @@ You can attach the command to any state report, or send it with `pane report-age
 
 After a Herdr server restart, Herdr opens the pane in the same directory and runs that command there. The command must follow these rules:
 
-- The first word is a plain command name on the user's `PATH`, such as `my-agent`, not a path.
+- The first word is a plain command name on the architect's `PATH`, such as `my-agent`, not a path.
 - No argument contains an apostrophe or a control character.
 - At most 64 arguments and 8 KiB in total.
 - Your source must hold the pane first, so send a state report with `report-agent` before or along with the command. Otherwise Herdr answers with `resume_not_accepted`.
@@ -82,7 +82,7 @@ Herdr rejects a command that breaks the first three rules with `invalid_resume_a
   --seq 3
 ```
 
-Releasing clears your agent's name, state, and resume command from the pane right away. Only release when the user actually quits. If your agent replaces one session with another in the same process, report the new session instead of releasing.
+Releasing clears your agent's name, state, and resume command from the pane right away. Only release when the architect actually quits. If your agent replaces one session with another in the same process, report the new session instead of releasing.
 
 If your agent exits without releasing, Herdr notices once the pane is back at its idle shell prompt and clears the agent and its resume command. This usually takes a second or two. It is a safety net, not a replacement for releasing.
 

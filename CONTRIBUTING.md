@@ -140,7 +140,7 @@ setup. Native Windows builds use the SDK installed with Visual Studio Build Tool
 
 For normal code changes, do not edit the root `README.md`, root `CHANGELOG.md`, `docs/preview/`, `docs/versions/`, or release payloads under `distribution/`.
 
-When a user-facing change needs documentation, update the unreleased draft under `docs/next/` or explain what documentation will be needed. Maintainers prepare the next changelog during release review.
+When an architect-facing change needs documentation, update the unreleased draft under `docs/next/` or explain what documentation will be needed. Maintainers prepare the next changelog during release review.
 
 ## Questions
 
