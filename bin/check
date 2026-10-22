@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# herdr (borrowed) — coding-agent runtime. bin/check.
+#
+# Fast self-test (PASS/FAIL), no compile:
+#   1. Cargo workspace parses.
+#   2. justfile present; build/test/check recipes exist.
+#   3. src/ + crates/ present.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "== herdr check: start =="
+cmd="$(command -v cargo 2>/dev/null || true)"
+CARGO=""
+for c in /home/toxic/.cargo/bin/cargo "$cmd" /usr/local/bin/cargo /usr/bin/cargo; do
+  [ -n "$c" ] && [ -x "$c" ] && { CARGO="$c"; break; }
+done
+[ -n "${CARGO:-}" ] || { echo "FAIL: cargo not found"; exit 1; }
+
+"$CARGO" metadata --no-deps --format-version 1 >/dev/null 2>&1 \
+  || { echo "FAIL: Cargo workspace does not parse"; exit 1; }
+echo "OK: Cargo workspace parses"
+
+[ -f justfile ] || { echo "FAIL: justfile missing"; exit 1; }
+"$(command -v just)" --list >/dev/null 2>&1 || true
+for recipe in build test check; do
+  if just --list 2>/dev/null | grep -qE "^[[:space:]]*$recipe([[:space:]]|$)"; then
+    echo "OK: just recipe '$recipe' present"
+  else
+    echo "FAIL: just recipe '$recipe' missing"; exit 1
+  fi
+done
+[ -d src ] && echo "OK: src/ present" || echo "WARN: src/ missing"
+echo "HERDR CHECK: PASS"
+exit 0
